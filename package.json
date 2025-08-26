@@ -1,0 +1,25 @@
+{
+  "name": "mongoose",
+  "version": "1.0.0",
+  "description": "use mongodb to store data and show sever web page.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kamlesh180/Mongoose.git"
+  },
+  "keywords": [],
+  "author": "Kamlesh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kamlesh180/Mongoose/issues"
+  },
+  "homepage": "https://github.com/kamlesh180/Mongoose#readme",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "mongoose": "^8.18.0"
+  }
+}
