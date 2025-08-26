@@ -6,6 +6,7 @@ const chat=require("./models/chat.js");
 
 app.set("view",path.join(__dirname,"views"));
 app.set("views engine","ejs");
+app.use(express.static(path,join (--dirname,"public")));
 
 main ()
 .then (()=> {
@@ -17,6 +18,12 @@ main ()
 async function main(){
 await mongoose.connect('mongodb://127.0.0.1:27017/whatsapp');
 }
+//Index Route
+app.get("/chats",async (req,res) =>{
+    let chats = await chat.find();
+    console.log(chats);
+    res.send("working");
+});
 let chat1 = new chat({
     from:"kamlesh",
     to :"rahul",
