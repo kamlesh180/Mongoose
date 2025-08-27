@@ -48,6 +48,12 @@ app.post("/chats",(req,res) =>{
     });
     res.redirect("/chats");
 });
+//edit route some error await
+app.get("/chats/:id/edit",(req,res) =>{
+    let {id} = req.params;
+    let Chat= chat.findById(id);
+    res.render("edit.ejs",{Chat});
+})
 
 let chat1 = new chat({
     from:"ramu",
