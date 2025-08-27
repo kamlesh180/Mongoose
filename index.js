@@ -2,11 +2,12 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const path = require("path");
-const chat=require("./models/chat.js");
+const chat=require('./models/chat.js');
+app.set("views", path.join(__dirname, "views"));
 
-app.set("view",path.join(__dirname,"views"));
-app.set("views engine","ejs");
-app.use(express.static(path,join (--dirname,"public")));
+app.set("view engine", "ejs");
+app.use(express.static(path.join (__dirname,"public")));
+app.use(express.urlencoded({extended:true}));
 
 main ()
 .then (()=> {
@@ -19,15 +20,39 @@ async function main(){
 await mongoose.connect('mongodb://127.0.0.1:27017/whatsapp');
 }
 //Index Route
-app.get("/chats",async (req,res) =>{
+app.get("/chats", async (req,res) =>{
     let chats = await chat.find();
     console.log(chats);
-    res.send("working");
+    res.render("index.ejs",{chats});
+}); 
+//New Route
+app.get("/chats/new", (req , res) =>{
+    res.render("new.ejs"); 
 });
+//create route
+app.post("/chats",(req,res) =>{
+    let {from,to , msg} = req.body;
+    let newChat = new chat({
+    from:from,
+    to:to,
+    msg:msg,
+    created_at:new Date(),
+    });
+    newChat 
+    .save()
+    .then((res)=>{
+        console.log("chat was saved");
+    })
+    .catch((err)=>{
+        console.log(err);
+    });
+    res.redirect("/chats");
+});
+
 let chat1 = new chat({
-    from:"kamlesh",
-    to :"rahul",
-    msg:"hey rahul , can you solve this problem",
+    from:"ramu",
+    to :"rajesh",
+    msg:"hey rajesh , can you give me 10 thousend ruppes",
     created_at:new Date(),
 });
 chat1.save()
@@ -39,7 +64,7 @@ chat1.save()
 });
 
 app.get("/",(req,res) => {
-    res.send("root is working");
+    res.send("root is working!");
 });
 app.listen(8080,()=> {
     console.log("server is listening on port 8080");

@@ -4,29 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini-Whatsapp</title>
-    <link rel="stylsheet" href="style.css">
+    <title>Mini-Whasapp</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
-    <h3> All Chats!</h3>
-    <% for (let chat of chats) {%>
+    <h3>All Chats.</h3>
+    <form method="GET" action="/chats/new">
+        <button>New Chat</button>
+    </form>
+    <br>
+    <% for(let chat of chats) {%>
         <div class="chat">
-            <p> From : <i>
-                    <% chat.from</i>
+            <p>From: <%=chat.from %>
             </p>
             <div class="msg">
-                <%= chat.msg %>
+                <p>
+                    <%= chat.msg %>
+                </p>
             </div>
+            <p>Recived by <%=chat.to %>
+            </p>
         </div>
-        <p>Recived by<i>
-                <%= chat.to %>
-            </i></p>
-        <hr>
-        <br></br>
-        <% } %>
-
+        <%} %>
 </body>
 
 </html>
